@@ -1,0 +1,12 @@
+[submodule "proxy/nginx"]
+	path = proxy/nginx
+	url = git@github.com:AnonymousRand-Server-Infra/nginx_config.git
+[submodule "proxy/anubis"]
+	path = proxy/anubis
+	url = git@github.com:AnonymousRand-Server-Infra/anubis_base_config.git
+[submodule "proxy/iocaine"]
+	path = proxy/iocaine
+	url = git@github.com:AnonymousRand-Server-Infra/iocaine_config.git
+[submodule "services/file_server"]
+	path = services/file_server
+	url = git@github.com:AnonymousRand-Server-Infra/file_server.git
