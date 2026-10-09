@@ -17,14 +17,11 @@ sudo -u "#$HOST_NONROOT_UID" bash ./sync_dotenvs.sh
 docker compose --profile "$DOCKER_DEFAULT_PROFILE" down
 
 # otherwise (e.g. if they were started by a nested docker project), we do a project-agnostic restart
+# SYNC: containers!
 docker stop nginx && docker rm -v nginx
 docker stop iocaine && docker rm -v iocaine
 docker stop file_server && docker rm -v file_server
 docker stop file_server_anubis && docker rm -v file_server_anubis
 
 docker system prune --force
-## for some reason only running the `docker compose build` part of these scripts
-## fails to see changes
-#./proxy/nginx/deploy.sh --no-stop
-#./services/personal_website/deploy.sh --no-stop
 docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build
