@@ -24,4 +24,9 @@ docker stop file_server && docker rm -v file_server
 docker stop file_server_anubis && docker rm -v file_server_anubis
 
 docker system prune --force
-docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build
+
+if [[ "$1" == "-d" ]]; then
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build -d
+else
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up --build
+fi
