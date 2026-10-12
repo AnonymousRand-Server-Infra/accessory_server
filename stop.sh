@@ -8,10 +8,10 @@ script_path="$(dirname "$(realpath "${BASH_SOURCE[0]:-$0}")")"
 cd "$script_path"
 
 source ./.env
+path_to_utils="$PATH_FROM_ROOT_TO_UTILS"
 
 # still need this for `docker compose down` to succeed
-chmod +x ./sync_dotenvs.sh
-./sync_dotenvs.sh
+chmod +x "$path_to_utils/sync_dotenvs.sh" && "$path_to_utils/sync_dotenvs.sh"
 
 # try this in our current directory first in case the services to stop were started by
 # this project originally
@@ -19,7 +19,8 @@ docker compose --profile "$DOCKER_DEFAULT_PROFILE" down
 
 # otherwise (e.g. if they were started by a nested docker project), we do a project-agnostic stop
 # SYNC: containers!
-docker stop nginx && docker rm -v nginx
-docker stop iocaine && docker rm -v iocaine
-docker stop file_server && docker rm -v file_server
-docker stop file_server_anubis && docker rm -v file_server_anubis
+source "$path_to_utils/bash_utils.sh"
+errorless_docker_down nginx
+errorless_docker_down iocaine
+errorless_docker_down file_server
+errorless_docker_down file_server_anubis
