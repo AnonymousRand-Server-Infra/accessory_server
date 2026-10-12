@@ -11,7 +11,7 @@ services:
     # in order to make sure that the socket volume is created with non-root privileges so
     # the other non-root containers can access it!
     pre_start:
-      - image: alpine:latest
+      - image: busybox:musl
         user: "0:0"
         command:
           - /usr/bin/env
