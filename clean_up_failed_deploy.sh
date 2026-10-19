@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
 set -x
 
 # IMPORTANT: this removes ALL docker containers on this host!
